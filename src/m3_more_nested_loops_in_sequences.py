@@ -78,7 +78,7 @@ def largest_number(seq_seq):
     where each subsequence contains only numbers.
     """
     # -------------------------------------------------------------------------
-    # TODO: 3. Implement and test this function.
+    # DONE: 3. Implement and test this function.
     #   Note that you should write its TEST function first (above).
     # -------------------------------------------------------------------------
     maximum = 0
@@ -87,6 +87,8 @@ def largest_number(seq_seq):
         for j in range(len(sublist)):
             if abs(sublist[j]) > maximum:
                 maximum = sublist[j]
+    if maximum == 0:
+        return None
     return maximum
 
 
@@ -96,7 +98,7 @@ def largest_number(seq_seq):
 def run_test_largest_negative_number():
     """ Tests the    largest_negative_number    function. """
     # -------------------------------------------------------------------------
-    # TODO: 4. Implement this TEST function.
+    # DONE: 4. Implement this TEST function.
     #   It TESTS the  largest_negative_number  function defined below.
     #
     #   Include enough tests to give you confidence that your solution
@@ -107,25 +109,25 @@ def run_test_largest_negative_number():
     print('Testing the   LARGEST_NEGATIVE_NUMBER   function:')
     print('-------------------------------------------------')
     # Test 1:
-    expected = 13
-    answer = largest_number([(3, 1, 4),
-                             (13, 10, 11, 7, 10),
-                             [1, 2, 3, 4]])
+    expected = -11
+    answer = largest_negative_number([(-3, -1, 4),
+                             (13, 10, -11, 7, 10),
+                             [1, -2, 3, 4]])
     print('Expected and actual are:', expected, answer)
 
     # Test 2:
     expected = -1111111111111111
-    answer = largest_number(([], [-1111111111111111], []))
+    answer = largest_negative_number(([], [-1111111111111111], []))
     print('Expected and actual are:', expected, answer)
 
     # Test 3:
     expected = None
-    answer = largest_number(([], [], []))
+    answer = largest_negative_number(([], [], []))
     print('Expected and actual are:', expected, answer)
 
-    # Test 3:
-    expected = 100
-    answer = largest_number(([1, 2, 3], [50, 60, 70], [0, 100, 2]))
+    # Test 4:
+    expected = -70
+    answer = largest_negative_number(([1, 2, 3], [50, 60, -70], [0, 100, 2]))
     print('Expected and actual are:', expected, answer)
 
 def largest_negative_number(seq_seq):
@@ -151,14 +153,23 @@ def largest_negative_number(seq_seq):
     where each subsequence contains only numbers.
     """
     # -------------------------------------------------------------------------
-    # TODO: 5. Implement and test this function.
+    # DONE: 5. Implement and test this function.
     #   Note that you should write its TEST function first (above).
     #
     # CHALLENGE: Try to solve this problem with no additional sequences
     #   being constructed (so the SPACE allowed is limited to the
     #   give sequence of sequences plus any non-list variables you want).
     # -------------------------------------------------------------------------
-
+    maximum = -1
+    for k in range(len(seq_seq)):
+        sublist = seq_seq[k]
+        for j in range(len(sublist)):
+            if sublist[j]<0:
+                if sublist[j]<maximum:
+                    maximum = sublist[j]
+    if maximum == -1:
+        return None
+    return maximum
 
 def run_test_first_is_elsewhere_too():
     """ Tests the    first_is_elsewhere_too    function. """
@@ -391,7 +402,7 @@ def first_is_elsewhere_too(seq_seq):
     and the given argument is a sequence of sequences.
     """
     # -------------------------------------------------------------------------
-    # TODO: 6. Implement and test this function.
+    # DONE: 6. Implement and test this function.
     #          Some tests are already written for you (above).
     #
     # IMPLEMENTATION RESTRICTION:
@@ -406,7 +417,12 @@ def first_is_elsewhere_too(seq_seq):
     #   in this problem, as doing so would defeat the goal of providing
     #   practice at loops within loops (within loops within ...)
     # -------------------------------------------------------------------------
-
+    for k in range (1,len(seq_seq)):
+        for j in range(len(seq_seq[k])):
+            for m in range(len(seq_seq[0])):
+                if seq_seq[0][m] == seq_seq[k][j]:
+                    return True
+    return False
 
 # -----------------------------------------------------------------------------
 # Calls  main  to start the ball rolling.
