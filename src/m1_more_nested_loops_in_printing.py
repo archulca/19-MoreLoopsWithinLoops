@@ -122,7 +122,7 @@ def triangle_upside_down(r):
     #   in this or the other problems in this module, as doing so would
     #   defeat the goal of providing practice at loops within loops.
     # -------------------------------------------------------------------------
-    for k in range(r-2,-2,-1):
+    for k in range(r-1,-1,-1):
         for j in range(r-k,1,-1):
             print(' ', end='')
         for m in range(1, k+2):
